@@ -1,1 +1,81 @@
+#Programa arboles
 
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.izquierda = None
+        self.derecha = None
+
+class Arbol:
+    
+    def __init__(self, dato):
+        self.raiz = Nodo(dato)
+
+    def __add_valores(self, nodo, dato):
+        if dato < nodo.dato:
+            if nodo.izquierda is None:
+                nodo.izquierda = Nodo(dato)
+            else:
+                self.__add_valores(nodo.izquierda, dato)
+        else:
+            if nodo.derecha is None:
+                nodo.derecha = Nodo(dato)
+            else:
+                self.__add_valores(nodo.derecha, dato)
+
+    def __recorrido_inorden(self, nodo):
+        if nodo is not None:
+            self.__recorrido_inorden(nodo.izquierda)
+            print(nodo.dato, end=", ")
+            self.__recorrido_inorden(nodo.derecha)
+
+    def __recorrido_preorden(self, nodo):
+        if nodo is not None:
+            print(nodo.dato, end=", ")
+            self.__recorrido_preorden(nodo.izquierda)
+            self.__recorrido_preorden(nodo.derecha)
+
+    def __recorrido_postorden(self, nodo):
+        if nodo is not None:
+            self.__recorrido_postorden(nodo.izquierda)
+            self.__recorrido_postorden(nodo.derecha)
+            print(nodo.dato, end=", ")
+
+
+
+    def add(self, dato):
+        self.__add_valores(self.raiz, dato)
+
+    def pre(self):
+        print("Imprimiendo árbol preorden: ")
+        self.__recorrido_preorden(self.raiz)
+        print("")
+
+    def post(self):
+        print("Imprimiendo árbol postorden: ")
+        self.__recorrido_postorden(self.raiz)
+        print("")
+
+    def inor(self):
+        print("Imprimiendo árbol inorden: ")
+        self.__recorrido_inorden(self.raiz)
+        print("")
+
+
+arbol_letras = Arbol("a")
+arbol_letras.add("f")
+arbol_letras.add("c")
+arbol_letras.add("w")
+arbol_letras.add("q")
+arbol_letras.add("m")
+arbol_letras.add("g")
+arbol_letras.add("r")
+arbol_letras.add("i")
+arbol_letras.add("j")
+arbol_letras.add("o")
+arbol_letras.add("l")
+letra= (input("Ingrese una letra para meterla en el arbol: "))
+arbol_letras.add(letra)
+arbol_letras.pre()
+arbol_letras.post()
+arbol_letras.inor()
